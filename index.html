@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="https://www.ftls.xyz/favicon-32x32.png">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <el-input type="textarea" autosize placeholder="请输入内容" v-model="input">
+        </el-input>
+        <el-button @click="postData">获取 短链地址</el-button>
+        <div>
+            <a v-bind:href="msg" target="_blank">{{ msg }}</a> 
+        </div>
+    </div>
+</body>
+<!-- import Vue before Element -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: function () {
+            return { visible: false, msg: 0, input: '', msg: "https://www.ftls.xyz" }
+        },
+        methods: {
+            postData() {
+                console.log(this.msg)
+                var fix = this;
+                $.ajax({
+                    method: "POST",
+                    url: "/",
+                    contentType: 'application/json',
+                    data: JSON.stringify({ "redirect_url": fix.input }),
+                    success: function (data) { fix.msg = data.short_url }
+                });
+            },
+        }
+    })
+</script>
+
+</html>
