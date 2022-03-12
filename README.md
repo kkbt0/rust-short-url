@@ -6,3 +6,8 @@ Use diesel_sqlite_pool.
 # Simple Test Html
 
 A simple test html in root dir
+
+# CORS
+
+CORS in src/main.rs 
+
